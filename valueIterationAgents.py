@@ -52,7 +52,7 @@ class ValueIterationAgent(ValueEstimationAgent):
               for action in self.mdp.getPossibleActions(state):
                 total = 0
                 for nextState, prob in self.mdp.getTransitionStatesAndProbs(state,action):
-                  total += prob * (self.mdp.getReward(state,action,nextState) + (self.discount*self.values[nextState]))
+                  total += self.mdp.getReward(state,action,nextState) + (prob * self.discount*self.values[nextState])
                 maxvalue = max(total, maxvalue)
                 tmpValues[state] = maxvalue
           self.values = tmpValues
